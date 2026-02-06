@@ -1,4 +1,4 @@
-package com.awesomepizza.order.domain;
+package com.awesomepizza.order.domain.enums;
 
 public enum OrderStatus {
     PENDING,

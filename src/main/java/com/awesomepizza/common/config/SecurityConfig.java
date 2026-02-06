@@ -1,5 +1,6 @@
 package com.awesomepizza.common.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,30 +19,33 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Value("${app.security.pizzaiolo.username}")
+    private String pizzaioloUsername;
+
+    @Value("${app.security.pizzaiolo.password}")
+    private String pizzaioloPassword;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Disabilita CSRF per API stateless
+            .csrf(csrf -> csrf.disable()) 
             .authorizeHttpRequests(authorize -> authorize
-                // Endpoint per i clienti (non autenticati)
-                .requestMatchers(HttpMethod.POST, "/api/v1/orders").permitAll() // Creazione ordine
-                .requestMatchers(HttpMethod.GET, "/api/v1/orders/{code}").permitAll() // Recupero ordine
-                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll() // Documentazione API
-                // Endpoint per il pizzaiolo (autenticati con ruolo PIZZAIOLO)
+                .requestMatchers(HttpMethod.POST, "/api/v1/orders").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/orders/{code}").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
                 .requestMatchers("/api/v1/pizzaiolo/**").hasRole("PIZZAIOLO")
-                // Tutte le altre richieste richiedono autenticazione
                 .anyRequest().authenticated()
             )
-            .httpBasic(Customizer.withDefaults()); // Abilita l'autenticazione Basic
+            .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails pizzaiolo = User.builder()
-            .username("pizzaiolo")
-            .password(passwordEncoder().encode("password")) // Codifica la password
+            .username(pizzaioloUsername)
+            .password(passwordEncoder.encode(pizzaioloPassword))
             .roles("PIZZAIOLO")
             .build();
         return new InMemoryUserDetailsManager(pizzaiolo);

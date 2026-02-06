@@ -1,4 +1,4 @@
-package com.awesomepizza.order.domain;
+package com.awesomepizza.order.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

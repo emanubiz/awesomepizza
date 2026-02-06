@@ -1,5 +1,6 @@
-package com.awesomepizza.order.domain;
+package com.awesomepizza.order.domain.entity;
 
+import com.awesomepizza.order.domain.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -46,15 +47,14 @@ public class Order {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Version
+    @Column(nullable = false)
     private Long version;
 
-    // Convenience method to add order items
     public void addOrderItem(OrderItem item) {
         orderItems.add(item);
         item.setOrder(this);
     }
 
-    // Convenience method to remove order items
     public void removeOrderItem(OrderItem item) {
         orderItems.remove(item);
         item.setOrder(null);

@@ -1,6 +1,6 @@
 package com.awesomepizza.order.application.dto;
 
-import com.awesomepizza.order.domain.OrderStatus;
+import com.awesomepizza.order.domain.enums.OrderStatus;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;

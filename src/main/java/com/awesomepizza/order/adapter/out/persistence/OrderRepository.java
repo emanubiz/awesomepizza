@@ -1,11 +1,17 @@
 package com.awesomepizza.order.adapter.out.persistence;
 
-import com.awesomepizza.order.domain.Order;
+import com.awesomepizza.order.domain.enums.OrderStatus;
+import com.awesomepizza.order.domain.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-public interface OrderRepository extends JpaRepository<Order, UUID> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
     Optional<Order> findByOrderCode(String orderCode);
+
+    Optional<Order> findFirstByStatusOrderByCreatedAtAsc(OrderStatus status);
+
+    boolean existsByStatus(OrderStatus status);
+
+    List<Order> findByStatus(OrderStatus status);
 }

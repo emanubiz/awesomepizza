@@ -1,11 +1,16 @@
-package com.awesomepizza.common.exception;
+package com.awesomepizza.common.exception.handler;
 
+import jakarta.persistence.OptimisticLockException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+
+import com.awesomepizza.common.exception.InvalidOrderStatusException;
+import com.awesomepizza.common.exception.OrderModificationNotAllowedException;
+import com.awesomepizza.common.exception.OrderNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -51,6 +56,16 @@ public class GlobalExceptionHandler {
             request.getDescription(false)
         );
         return new ResponseEntity<>(details, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(OptimisticLockException.class)
+    public ResponseEntity<ExceptionDetails> handleOptimisticLockException(OptimisticLockException ex, WebRequest request) {
+        ExceptionDetails details = new ExceptionDetails(
+            LocalDateTime.now(),
+            "L'ordine è stato modificato da un altro utente. Ricarica i dati e riprova.",
+            request.getDescription(false)
+        );
+        return new ResponseEntity<>(details, HttpStatus.CONFLICT);
     }
 
     // Helper class for consistent error response structure

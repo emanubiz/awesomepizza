@@ -9,5 +9,17 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
+
+app:
+  security:
+    pizzaiolo:
+      username: pizzaiolo
+      password: password
+
+logging:
+  level:
+    com.awesomepizza: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
