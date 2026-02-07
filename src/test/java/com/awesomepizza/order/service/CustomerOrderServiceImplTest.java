@@ -8,7 +8,6 @@ import com.awesomepizza.order.exception.OrderModificationNotAllowedException;
 import com.awesomepizza.order.exception.OrderNotFoundException;
 import com.awesomepizza.order.mapper.OrderMapper;
 import com.awesomepizza.order.repository.OrderRepository;
-import com.awesomepizza.order.service.CustomerOrderServiceImpl;
 import com.awesomepizza.order.domain.OrderStatusValidator;
 import com.awesomepizza.order.domain.entity.Order;
 import com.awesomepizza.order.domain.enums.OrderStatus;
