@@ -8,8 +8,29 @@ Sistema backend per gestire gli ordini di una pizzeria. I clienti possono ordina
 - Spring Boot 4.0.2
 - PostgreSQL
 - Spring Security (HTTP Basic)
+- Docker / Docker Compose
 
 ## Setup
+
+### Avvio rapido (plug & play)
+
+È possibile avviare **database e applicazione insieme** tramite Docker Compose:
+
+```bash
+docker compose up --build -d
+```
+
+Questo comando:
+
+avvia PostgreSQL
+
+builda l'applicazione Spring Boot
+
+espone l'app su http://localhost:8080
+
+Prerequisiti: Docker e Docker Compose installati.
+
+## Setup Manuale
 
 ### Database
 
