@@ -1,0 +1,36 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: awesomepizza-postgres
+    environment:
+      POSTGRES_DB: awesomepizza_db
+      POSTGRES_USER: awesomepizza_user
+      POSTGRES_PASSWORD: awesomepizza_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - awesomepizza_data:/var/lib/postgresql/data
+      - ./src/main\resources/db/migration/initial_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U awesomepizza_user -d awesomepizza_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: awesomepizza-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/awesomepizza_db
+      SPRING_DATASOURCE_USERNAME: awesomepizza_user
+      SPRING_DATASOURCE_PASSWORD: awesomepizza_password
+    depends_on:
+      db:
+        condition: service_healthy
+  
+
+volumes:
+  awesomepizza_data:
