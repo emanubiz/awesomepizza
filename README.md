@@ -28,7 +28,7 @@ builda l'applicazione Spring Boot
 
 espone l'app su http://localhost:8080
 
-Prerequisiti: Docker e Docker Compose installati.
+Prerequisiti: Docker (Docker Desktop su Windows/macOS oppure Docker Engine su Linux)
 
 ## Setup Manuale
 
