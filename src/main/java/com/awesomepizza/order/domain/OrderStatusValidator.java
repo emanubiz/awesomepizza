@@ -1,8 +1,10 @@
 package com.awesomepizza.order.domain;
 
-import com.awesomepizza.common.exception.InvalidOrderStatusException;
 import org.springframework.stereotype.Component;
+
 import com.awesomepizza.order.domain.enums.OrderStatus;
+import com.awesomepizza.order.exception.InvalidOrderStatusException;
+
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;

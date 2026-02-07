@@ -1,6 +1,7 @@
 package com.awesomepizza.order.domain;
 import com.awesomepizza.order.domain.enums.OrderStatus;
-import com.awesomepizza.common.exception.InvalidOrderStatusException;
+import com.awesomepizza.order.exception.InvalidOrderStatusException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
