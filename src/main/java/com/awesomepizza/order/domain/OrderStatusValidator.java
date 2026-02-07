@@ -10,35 +10,35 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Validatore per le transizioni di stato degli ordini.
- * Implementa una macchina a stati per garantire che solo transizioni valide siano permesse.
+ * Validator for order status transitions.
+ * Implements a state machine to ensure only valid transitions are allowed.
  */
 @Component
 public class OrderStatusValidator {
 
-    // Mappa delle transizioni valide: stato corrente -> stati successivi permessi
+    // Map of valid transitions: current status -> allowed next statuses
     private static final Map<OrderStatus, Set<OrderStatus>> VALID_TRANSITIONS = Map.of(
         OrderStatus.PENDING, EnumSet.of(
-            OrderStatus.IN_PREPARATION,  // Il pizzaiolo prende in carico
-            OrderStatus.CANCELED         // Il cliente cancella
+            OrderStatus.IN_PREPARATION,
+            OrderStatus.CANCELED
         ),
         OrderStatus.IN_PREPARATION, EnumSet.of(
-            OrderStatus.READY,           // La pizza è pronta
-            OrderStatus.CANCELED         // Annullamento eccezionale
+            OrderStatus.READY,
+            OrderStatus.CANCELED
         ),
         OrderStatus.READY, EnumSet.of(
-            OrderStatus.COMPLETED        // Ordine consegnato/ritirato
+            OrderStatus.COMPLETED
         ),
-        OrderStatus.COMPLETED, EnumSet.noneOf(OrderStatus.class), // Stato finale
-        OrderStatus.CANCELED, EnumSet.noneOf(OrderStatus.class)   // Stato finale
+        OrderStatus.COMPLETED, EnumSet.noneOf(OrderStatus.class),
+        OrderStatus.CANCELED, EnumSet.noneOf(OrderStatus.class)
     );
 
     /**
-     * Valida se una transizione di stato è permessa
+     * Validates if a status transition is permitted.
      * 
-     * @param currentStatus lo stato corrente dell'ordine
-     * @param newStatus il nuovo stato desiderato
-     * @throws InvalidOrderStatusException se la transizione non è valida
+     * @param currentStatus the current status of the order.
+     * @param newStatus the desired new status.
+     * @throws InvalidOrderStatusException if the transition is not valid.
      */
     public void validateTransition(OrderStatus currentStatus, OrderStatus newStatus) {
         if (currentStatus == null || newStatus == null) {
@@ -46,7 +46,7 @@ public class OrderStatusValidator {
         }
 
         if (currentStatus == newStatus) {
-            return; // Transizione verso lo stesso stato è permessa (no-op)
+            return;
         }
 
         Set<OrderStatus> allowedTransitions = VALID_TRANSITIONS.get(currentStatus);
@@ -63,20 +63,20 @@ public class OrderStatusValidator {
     }
 
     /**
-     * Verifica se un ordine può essere modificato dal cliente
+     * Checks if an order can be modified by the customer.
      * 
-     * @param currentStatus lo stato corrente dell'ordine
-     * @return true se l'ordine può essere modificato, false altrimenti
+     * @param currentStatus the current status of the order.
+     * @return true if the order can be modified, false otherwise.
      */
     public boolean canBeModifiedByCustomer(OrderStatus currentStatus) {
         return currentStatus == OrderStatus.PENDING;
     }
 
     /**
-     * Verifica se un ordine può essere preso in carico dal pizzaiolo
+     * Checks if an order can be taken in charge by the pizzaiolo.
      * 
-     * @param currentStatus lo stato corrente dell'ordine
-     * @return true se l'ordine può essere preso in carico, false altrimenti
+     * @param currentStatus the current status of the order.
+     * @return true if the order can be taken in charge, false otherwise.
      */
     public boolean canBeTakenByPizzaiolo(OrderStatus currentStatus) {
         return currentStatus == OrderStatus.PENDING;
