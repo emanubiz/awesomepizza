@@ -53,6 +53,12 @@ CREATE USER awesomepizza_user WITH PASSWORD 'awesomepizza_password';
 GRANT ALL PRIVILEGES ON DATABASE awesomepizza_db TO awesomepizza_user;
 ```
 
+Nota importante
+
+L'applicazione utilizza `hibernate.ddl-auto=validate`, quindi Hibernate non crea né modifica lo schema database.
+
+Lo schema deve essere creato manualmente (eseguendo `initial_schema.sql`) prima dell'avvio dell'applicazione.
+
 ### Applicazione
 
 ```bash
