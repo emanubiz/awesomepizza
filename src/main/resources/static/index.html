@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Pizza - API Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .status {
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .link-button {
+            display: block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .link-button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            color: #666;
+        }
+        
+        .info-item strong {
+            color: #333;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍕 Awesome Pizza</h1>
+        <p class="subtitle">Sistema di Gestione Ordini Pizzeria</p>
+        
+        <span class="status">✓ API Attiva</span>
+        
+        <div class="links">
+            <a href="/swagger-ui/index.html" class="link-button">
+                📚 Documentazione API (Swagger)
+            </a>
+            <a href="https://github.com/emanubiz/awesomepizza/blob/main/API_EXAMPLES.md" class="link-button" target="_blank">
+                💡 Esempi API (curl)
+            </a>
+        </div>
+        
+        <div class="info" style="margin-top: 20px; padding-top: 20px; border-top: none;">
+            <h3 style="color: #333; margin-bottom: 15px; font-size: 1.1em;">Endpoint Principali</h3>
+            <div style="background: #f9fafb; padding: 15px; border-radius: 8px; font-size: 0.9em;">
+                <div style="margin-bottom: 10px;">
+                    <strong style="color: #667eea;">POST</strong> <code>/api/v1/orders</code> - Crea ordine
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <strong style="color: #10b981;">GET</strong> <code>/api/v1/orders/{code}</code> - Verifica stato
+                </div>
+                <div>
+                    <strong style="color: #f59e0b;">AUTH</strong> <code>/api/v1/pizzaiolo/**</code> - Gestione pizzaiolo
+                </div>
+            </div>
+        </div>
+        
+        <div class="info">
+            <div class="info-item">
+                <span>Versione:</span>
+                <strong>1.0</strong>
+            </div>
+            <div class="info-item">
+                <span>Framework:</span>
+                <strong>Spring Boot 4.0.2</strong>
+            </div>
+            <div class="info-item">
+                <span>Java:</span>
+                <strong>21</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
