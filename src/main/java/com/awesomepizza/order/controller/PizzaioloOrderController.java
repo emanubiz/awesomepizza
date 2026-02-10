@@ -125,7 +125,7 @@ public class PizzaioloOrderController {
             @ApiResponse(responseCode = "404", description = "No pending orders found to be taken"),
             @ApiResponse(responseCode = "401", description = "Unauthorized - Basic authentication required")
     })
-    @PostMapping("/takeNext")
+    @PostMapping("/take-next")
     public ResponseEntity<OrderResponse> takeNextOrder() {
         log.info("Received request to take the next pending order");
         OrderResponse response = pizzaioloOrderService.takeNextOrder();

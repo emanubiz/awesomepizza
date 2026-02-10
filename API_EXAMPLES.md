@@ -80,7 +80,7 @@ Lo stato passa da `PENDING` a `IN_PREPARATION`.
 ### Prendi prossimo ordine in coda
 
 ```bash
-curl -X POST -u $AUTH $BASE_URL/api/v1/pizzaiolo/orders/takeNext
+curl -X POST -u $AUTH $BASE_URL/api/v1/pizzaiolo/orders/take-next
 ```
 
 Prende automaticamente l'ordine PENDING più vecchio.
@@ -116,7 +116,7 @@ echo "Ordine: $ORDER"
 curl $BASE_URL/api/v1/orders/$ORDER | jq '.status'
 
 # 3. Pizzaiolo prende prossimo ordine
-curl -s -X POST -u $AUTH $BASE_URL/api/v1/pizzaiolo/orders/takeNext | jq '.status'
+curl -s -X POST -u $AUTH $BASE_URL/api/v1/pizzaiolo/orders/take-next | jq '.status'
 
 # 4. Pizzaiolo segna come pronto
 curl -s -X POST -u $AUTH $BASE_URL/api/v1/pizzaiolo/orders/$ORDER/status/READY | jq '.status'

@@ -86,7 +86,7 @@ Username: `pizzaiolo` / Password: `password`
 - `GET /api/v1/pizzaiolo/orders` - Lista tutti gli ordini
 - `GET /api/v1/pizzaiolo/orders/pending` - Lista ordini in attesa
 - `POST /api/v1/pizzaiolo/orders/{code}/take` - Prendi in carico ordine
-- `POST /api/v1/pizzaiolo/orders/takeNext` - Prendi prossimo ordine in coda
+- `POST /api/v1/pizzaiolo/orders/take-next` - Prendi prossimo ordine in coda
 - `POST /api/v1/pizzaiolo/orders/{code}/status/{newStatus}` - Aggiorna stato
 
 ## Stati ordine
